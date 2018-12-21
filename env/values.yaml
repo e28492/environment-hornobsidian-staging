@@ -12,3 +12,20 @@ cleanup:
   Annotations:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
+expose:
+  config:
+    domain: '''jxd.us-south.containers.appdomain.cloud'''
+    exposer: Ingress
+    http: "false"
+    tlsacme: "true"
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+jenkins:
+  Servers:
+    Global:
+      EnvVars:
+        DOCKER_REGISTRY: registry.ng.bluemix.net
+        TILLER_NAMESPACE: kube-system
+PipelineSecrets:
+  DockerConfig: '{"auths":{"registry.ng.bluemix.net":{"auth":"dG9rZW46ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnFkR2tpT2lKa1pUSmxaV0k1TnkweU5HWTRMVFU1WTJZdE9XUmpNeTFtTm1Rek5EWXpOMk5qWXpjaUxDSnBjM01pT2lKeVpXZHBjM1J5ZVM1dVp5NWliSFZsYldsNExtNWxkQ0o5Lm9oaEZoXzBnWWtwdmRkOU1qaFdNQ1N2YzJCYWNLdlNNRDV4OHFFMnpuSkE="}}}'
